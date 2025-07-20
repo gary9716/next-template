@@ -92,9 +92,5 @@ USER nodejs
 # 暴露端口
 EXPOSE $PORT
 
-# 健康檢查
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:$PORT/api/health || exit 1
-
 # 啟動命令
 CMD ["node", "server.js"]
