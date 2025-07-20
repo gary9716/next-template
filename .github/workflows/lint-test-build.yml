@@ -26,9 +26,10 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
             ${{ runner.os }}-nextjs-
       - name: Add GITHUB_TOKEN to .npmrc
+        if: ${{ secrets.GH_ACCESS_TOKEN }}
         run: |
           npm config set //npm.pkg.github.com/:_authToken ${{ secrets.GH_ACCESS_TOKEN }}
-          npm config set @Moonlit-Lab:registry https://npm.pkg.github.com
+          npm config set @${{ github.repository_owner }}:registry https://npm.pkg.github.com
       - run: yarn install
       - run: yarn lint
       - run: yarn test

@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
 FROM base AS deps
 
 ARG GH_TOKEN
+ARG REPO_OWNER
 ARG NODE_ENV=production
 
 WORKDIR /app
@@ -24,14 +25,14 @@ WORKDIR /app
 # 條件性設置 GitHub token（如果存在）
 RUN if [ -n "$GH_TOKEN" ]; then \
         npm config set //npm.pkg.github.com/:_authToken $GH_TOKEN && \
-        npm config set @your-github-username:registry https://npm.pkg.github.com; \
+        npm config set @${REPO_OWNER}:registry https://npm.pkg.github.com; \
     fi
 
 # 複製 package 文件
 COPY package.json yarn.lock ./
 
 # 安裝依賴
-RUN yarn install --frozen-lockfile --production=false
+RUN yarn install --frozen-lockfile
 
 ####
 ## Builder

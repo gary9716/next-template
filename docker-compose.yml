@@ -9,7 +9,6 @@ services:
         - GH_TOKEN=${GH_TOKEN}
         - BUILD=${BUILD:-latest}
         - NEXT_PUBLIC_ENV=${NEXT_PUBLIC_ENV:-production}
-        - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
     ports:
       - '3000:3000'
     environment:
