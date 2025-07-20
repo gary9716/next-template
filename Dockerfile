@@ -31,8 +31,8 @@ RUN if [ -n "$GH_TOKEN" ]; then \
 # 複製 package 文件
 COPY package.json yarn.lock ./
 
-# 安裝依賴
-RUN yarn install --frozen-lockfile
+# 安裝依賴(包含 devDependencies)
+RUN yarn install --frozen-lockfile --production=false
 
 ####
 ## Builder
